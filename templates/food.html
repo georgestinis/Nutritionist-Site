@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<main class="pt-5 mx-lg-5">
+    <div class="container-fluid mt-5">
+        <!-- Heading -->
+        <div class="card mb-4 wow fadeIn animated" style="visibility: visible; animation-name: fadeIn;">
+          <!--Card content-->
+          <div class="card-body d-sm-flex justify-content-between">
+            <h3 class="mb-2 mb-sm-0 pt-1">
+              <a href="https://mdbootstrap.com/docs/jquery/" target="_blank">Food Page</a>
+            </h3>
+          </div>
+        </div>
+        <!-- Heading -->
+        <div class="card mb-4 wow fadeIn animated" style="visibility: visible; animation-name: fadeIn;">
+            <div class="card">
+                <h5 class="card-header info-color white-text text-center py-4"><strong>Food</strong></h5>
+                <div class="card-body px-lg-5 pt-0">
+                    <form method="POST" class="md-form" style="color: #757575;">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="form-group col-xs-12 col-md-6">
+                                <p>Product name *</p>
+                                <input id="name" type="text" class="form-control required" placeholder="Enter product name" name="name" value="">
+                            </div>
+                            <div class="form-group col-xs-12 col-md-6">
+                                <p>Category</p>
+                                {{ form.category }}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-xs-12 col-md-6">
+                                <p>Μονάδα μέτρησης μεγέθους ανά 100</p>
+                                {{ form.megethos }}
+                            </div>
+                        </div>                               
+                        <hr>
+                        <div class="row">
+                            <h5>Μακροθρεπτικά</h5>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-xs-12 col-md-6">
+                                <p>Ενέργεια</p>
+                                <div class="input-group">
+                                    <input id="energyCal" type="text" class="form-control number"  name="energyCal" value="0">
+                                    <div class="input-group-addon">kcal</div>
+                                </div>
+                            </div>
+                            <div class="form-group col-xs-12 col-md-6">
+                                <p>Ενέργεια</p>
+                                <div class="input-group">
+                                    <input id="energykJ" type="text" class="form-control number"  name="energykJ" value="0">
+                                    <div class="input-group-addon">kJ</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-xs-12 col-md-6">
+                                <p>Πρωτεΐνη</p>
+                                <div class="input-group">
+                                    <input id="protein" type="text" class="form-control number"  name="protein" value="0">
+                                    <div class="input-group-addon">g</div>
+                                </div>
+                            </div>
+                            <div class="form-group col-xs-12 col-md-6">
+                                <p>Υδατάνθρακες</p>
+                                <div class="input-group">
+                                    <input id="carb" type="text" class="form-control number"  name="carb" value="0">
+                                    <div class="input-group-addon">g</div>
+                               </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                                <div class="form-group col-xs-12 col-md-6">
+                                    <p>Ολικό λίπος</p>
+                                    <div class="input-group">
+                                        <input id="total_fat" type="text" class="form-control number"  name="total_fat" value="0">
+                                        <div class="input-group-addon">g</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        <button class="btn btn-outline-info btn-rounded btn-block z-depth-0 my-4 waves-effect" type="submit">Προσθήκη νέου τροφίμου</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+                    <!-- <h3>Food</h3>
+                    <div class="row">
+                        <div class="md-form col-lg-6 col-md-12 mb-4">
+                            <input type='text' placeholder='Enter product name' id='name' name='name' class='form-control' />
+                            <label for="name" class="">Name</label>
+                        </div>
+                        <div class="md-form col-lg-6 col-md-12 mb-4">
+                                {{ form.category }}
+                                <label for="id_category" class="">Category</label>
+                        </div>
+                    </div> -->
+
+{% endblock content %}
+
