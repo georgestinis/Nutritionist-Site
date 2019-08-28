@@ -1,12 +1,15 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.shortcuts import redirect
+from django.views.generic import ListView
+from django.db.models import Q
 
 from .forms import FoodForm
 from .models import FoodProduct
 # Create your views here.
 def home(request):
     return render(request, "home.html")
+
 
 def is_valid_form(values):
     valid = True
@@ -15,7 +18,7 @@ def is_valid_form(values):
             valid = False
     return valid
 
-def get_name(request):
+def food_form(request):
     # if this is a POST request we need to process the form data
     if request.method == 'POST':
         # create a form instance and populate it with data from the request:
@@ -50,6 +53,19 @@ def get_name(request):
     else:
         form = FoodForm()
 
-    return render(request, 'food.html', {'form': form})
+    return render(request, 'foodform.html', {'form': form})
 
-
+class FoodView(ListView):
+    model = FoodProduct
+    paginate_by = 30
+    template_name = "foodtable.html"
+    
+    def get_queryset(self):
+        query = self.request.GET.get('q')
+        if query is None:
+            object_list = FoodProduct.objects.all()
+        else:
+            object_list = FoodProduct.objects.filter(
+                Q(name__icontains=query)
+            )
+        return object_list
