@@ -1,0 +1,52 @@
+{% extends "nutrition_dj/base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="wrapper wrapper-content animated">
+        <div class="row">
+            <div class="col-xs-12">
+                <div id="add-food" class="ibox float-e-marging">
+                    <div class="ibox-title">
+                        <div class="col-xs-10">
+                            <h3>
+                                <a style="color:#528405" href="{% url 'food:foodtable' %}">Πίνακας Τροφίμων</a> / <a style="color:#528405" href="{% url 'food:food-detail' object.id %}">Πληροφορίες</a> / Διαγραφή Τροφίμου
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="widget foods-widget no-padding">
+                    <div class="widget-header display-flex">
+                        <div class="flex-grow">
+                            <h4 class="title">Διαγραφή Προσαρμοσμένου Τροφίμου</h4>
+                        </div>
+                    </div>
+                    <form method="POST">
+                        <div class="widget-content">
+                            {% csrf_token %}
+                            <div class="container-fluid">
+                                <h4 class="form-group">
+                                    Είσαι σίγουρος ότι θέλεις να διαγράψεις το τρόφιμο με όνομα: "{{ object.name }}"
+                                </h4> 
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                                <button class="btn btn-danger" type="submit">Διαγραφή</button>
+                                <a class="btn btn-warning" href="{% url 'food:food-detail' object.id %}">Άκυρο</a>
+                        </div> 
+                    </form>  
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+{% endblock content %}
+
+{% block extra_scripts %}
+    <script>$("select").addClass( "custom-select d-block w-100" );</script>
+{% endblock extra_scripts %}

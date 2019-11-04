@@ -1,0 +1,297 @@
+{% extends "nutrition_dj/base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="wrapper wrapper-content animated">
+    <div class="row">
+        <div class="col-xs-12 col-md-3">
+            <div class="patient-card full-height">
+                <div class="patient-avatar">
+                    {% if object.fyllo == 'm' %}
+                        <div class="icon"><i class="fas fa-male fa-5x"></i></div>
+                    {% else %}
+                        <div class="icon"><i class="fas fa-female fa-5x"></i></div>
+                    {% endif %}
+                    <div class="patient-name">
+                        <h2>{{ object.surname }} {{ object.name }}</h2>
+                    </div>
+                    <ul class="patient-buttons">
+                        <li><a href="#" id="schedule_appointment" class="btn btn-primary full-width">Δημιουργία Ραντεβού</a></li>
+                        <li><a href="#" class="btn btn-danger full-width">Διαγραφή Πελάτη</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-md-9">
+            <div class="widget no-margins">
+                <div class="widget-header">
+                    <h4 class="title">Πληροφορίες Πελάτη</h4>
+                    <p class="description">Προσωπικές πληροφορίες του Πελάτη.</p>
+                </div>
+                <div class="widget-content">
+                    <div class="row">
+                        <div class="col-xs-12 col-md-6">
+                            <div class="info-row">
+                                <div class="row display-flex">
+                                    <div class="col-xs-12 col-md-4 info-name no-padding">
+                                        <div class="name">Όνομα</div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-8 info-input no-padding">
+                                        <div class="form-control">{{ object.name }}</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="info-row">
+                                <div class="row display-flex">
+                                    <div class="col-xs-12 col-md-4 info-name no-padding">
+                                        <div class="name">Επώνυμο</div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-8 info-input no-padding">
+                                        <div class="form-control">{{ object.surname }}</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="info-row">
+                                <div class="row display-flex">
+                                    <div class="col-xs-12 col-md-4 info-name no-padding">
+                                        <div class="name">Όνομα Πατρός</div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-8 info-input no-padding">
+                                        <div class="form-control">
+                                            {% if object.father_name is not None %}
+                                                {{ object.father_name }}
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="info-row">
+                                <div class="row display-flex">
+                                    <div class="col-xs-12 col-md-4 info-name no-padding">
+                                        <div class="name">Φύλο</div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-8 info-input no-padding">
+                                        <div class="form-control">{{ object.get_fyllo_display }}</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="info-row">
+                                <div class="row display-flex">
+                                    <div class="col-xs-12 col-md-4 info-name no-padding">
+                                        <div class="name">Ημερομηνία Γεννήσεως</div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-8 info-input no-padding">
+                                        <div class="form-control">{{ object.gennhsh|date:"j/n/Y" }}</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="info-row">
+                                <div class="row display-flex">
+                                    <div class="col-xs-12 col-md-4 info-name no-padding">
+                                        <div class="name">Τηλέφωνο</div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-8 info-input no-padding">
+                                        <div class="form-control">
+                                            {% if object.telephone is not None %}
+                                                {{ object.telephone }}
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="info-row">
+                                <div class="row display-flex">
+                                    <div class="col-xs-12 col-md-4 info-name no-padding">
+                                        <div class="name">Κινητό</div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-8 info-input no-padding">
+                                        <div class="form-control">
+                                            {% if object.phone is not None %}
+                                                {{ object.phone }}
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="info-row">
+                                <div class="row display-flex">
+                                    <div class="col-xs-12 col-md-4 info-name no-padding">
+                                        <div class="name">E-mail</div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-8 info-input no-padding">
+                                        <div class="form-control">
+                                            {% if object.e_mail is not None %}
+                                                {{ object.e_mail }}
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="info-row">
+                                <div class="row display-flex">
+                                    <div class="col-xs-12 col-md-4 info-name no-padding">
+                                        <div class="name">Επάγγελμα</div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-8 info-input no-padding">
+                                        <div class="form-control">
+                                            {% if object.epaggelma is not None %}
+                                                {{ object.epaggelma }}
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="info-row">
+                                <div class="row display-flex">
+                                    <div class="col-xs-12 col-md-4 info-name no-padding">
+                                        <div class="name">Ειδικότητα</div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-8 info-input no-padding">
+                                        <div class="form-control">
+                                            {% if object.eidikothta is not None %}
+                                                {{ object.eidikothta }}
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-md-6">
+                            <div class="info-row">
+                                <div class="row display-flex">
+                                    <div class="col-xs-12 col-md-4 info-name no-padding">
+                                        <div class="name">Ημερομηνία Δημιουργίας</div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-8 info-input no-padding">
+                                        <div class="form-control">{{ object.date_created|date:"j/n/Y" }}</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="info-row">
+                                <div class="row display-flex">
+                                    <div class="col-xs-12 col-md-4 info-name no-padding">
+                                        <div class="name">Πόλη</div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-8 info-input no-padding">
+                                        <div class="form-control">
+                                            {% if object.polh is not None %}
+                                                {{ object.polh }}
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="info-row">
+                                <div class="row display-flex">
+                                    <div class="col-xs-12 col-md-4 info-name no-padding">
+                                        <div class="name">Διεύθυνση</div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-8 info-input no-padding">
+                                        <div class="form-control">
+                                            {% if object.dieythinsi is not None %}
+                                                {{ object.dieythinsi }}
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="info-row">
+                                <div class="row display-flex">
+                                    <div class="col-xs-12 col-md-4 info-name no-padding">
+                                        <div class="name">Περιοχή</div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-8 info-input no-padding">
+                                        <div class="form-control">
+                                            {% if object.perioxi is not None %}
+                                                {{ object.perioxi }}
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="info-row">
+                                <div class="row display-flex">
+                                    <div class="col-xs-12 col-md-4 info-name no-padding">
+                                        <div class="name">Τ.Κ.</div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-8 info-input no-padding">
+                                        <div class="form-control">
+                                            {% if object.tk is not None %}
+                                                {{ object.tk }}
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            </br>
+                            <div class="info-row">
+                                <div class="row display-flex">
+                                    <div class="col-xs-12 col-md-4 info-name no-padding">
+                                        <div class="name">Οικογενειακή κατάσταση</div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-8 info-input no-padding">
+                                        <div class="form-control">
+                                            {{ object.get_oikogeniaki_katastasi_display }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            </br>
+                            <div class="info-row">
+                                <div class="row display-flex">
+                                    <div class="col-xs-12 col-md-4 info-name no-padding">
+                                        <div class="name">Α.Φ.Μ.</div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-8 info-input no-padding">
+                                        <div class="form-control">
+                                            {% if object.afm is not None %}
+                                                {{ object.afm }}
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="info-row">
+                                <div class="row display-flex">
+                                    <div class="col-xs-12 col-md-4 info-name no-padding">
+                                        <div class="name">ΑΜΚΑ</div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-8 info-input no-padding">
+                                        <div class="form-control">
+                                            {% if object.amka is not None %}
+                                                {{ object.amka }}
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="info-row">
+                                <div class="row display-flex">
+                                    <div class="col-xs-12 col-md-4 info-name no-padding">
+                                        <div class="name">ΔΟΥ</div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-8 info-input no-padding">
+                                        <div class="form-control">
+                                            {% if object.doy is not None %}
+                                                {{ object.doy }}
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="info-row">
+                                <div class="row display-flex">
+                                    <a href="#" id="schedule_appointment" class="btn btn-primary full-width">Ενημέρωση Πληροφοριών</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

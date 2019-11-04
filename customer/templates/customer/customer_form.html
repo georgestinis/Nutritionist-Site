@@ -1,0 +1,143 @@
+{% extends "nutrition_dj/base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="wrapper wrapper-content animated">
+    <div class="row">
+        <div class="col-xs-12">
+            <div id="add-food" class="ibox float-e-marging">
+                <div class="ibox-title">
+                    <div class="col-xs-10">
+                        <h3>
+                            <a style="color:#528405" href="{% url 'customer:customertable' %}">Πίνακας Πελατών</a> / Νέος Πελάτης
+                        </h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="widget foods-widget no-padding">
+                <div class="widget-header display-flex">
+                    <div class="flex-grow">
+                        <h4 class="title">Καταχώρηση Πελάτη</h4>
+                    </div>
+                </div>
+                <form id="add-food-form" class="clear-fix" method="POST">
+                    <div class="widget-content">
+                        {% csrf_token %}
+                        <div class="container-fluid">
+                            <div class="form-group col-xs-12 col-md-6">
+                                <label class="string required" for="name" aria-required="true">
+                                    <abbr title="required">*</abbr> Όνομα
+                                </label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fas fa-fw fa-user"></i>
+                                    </div>
+                                    <div class="form-group string required patient_name" aria-required="true">
+                                        <input class="string required form-control" autofocus="autofocus" type="text" name="name" id="name" aria-required="true">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group col-xs-12 col-md-6">
+                                <label class="string required" for="surname" aria-required="true">
+                                    <abbr title="required">*</abbr> Επώνυμο
+                                </label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fas fa-fw fa-user"></i>
+                                    </div>
+                                    <div class="form-group string required patient_last_name" aria-required="true">
+                                        <input class="string required form-control" type="text" name="surname" id="surname" aria-required="true">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group col-xs-12 col-md-6">
+                                <label class="integer required" for="fyllo" aria-required="true">
+                                    <abbr title="required">*</abbr> Φύλο</label>
+                                <div class="input-group gender">
+                                    <div class="input-group-addon">
+                                        <i class="fas fa-fw fa-venus-mars"></i>
+                                    </div>
+                                    <div class="form-group select required patient_gender" aria-required="true">
+                                        {{ form.fyllo }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group col-xs-12 col-md-6">
+                                <label class="date required" for="gennhsh" aria-required="true">
+                                    <abbr title="required">*</abbr> Ημερομηνία Γέννησης
+                                </label>
+                                <div class="input-group birthdate">
+                                    <div class="input-group-addon">
+                                        <i class="fas fa-fw fa-calendar-o"></i>
+                                    </div>
+                                    <div class="form-group string required patient_birthdate" aria-required="true">
+                                        <input class="string required date-picker form-control" type="date" name="gennhsh" id="gennhsh" aria-required="true">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group col-xs-12 col-md-6">
+                                <label class="string" for="father_name" aria-required="true">
+                                    Όνομα πατρός
+                                </label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fas fa-fw fa-user"></i>
+                                    </div>
+                                    <div class="form-group string" aria-required="true">
+                                        <input class="string form-control" autofocus="autofocus" type="text" name="father_name" id="father_name" aria-required="true">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group col-xs-12 col-md-6">
+                                <label class="email optional" for="e_mail">E-mail</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fas fa-fw fa-at"></i>
+                                    </div>
+                                    <div class="form-group email optional patient_email">
+                                        <input class="string email optional form-control" type="email" value="" name="e_mail" id="e_mail">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group col-xs-12 col-md-6">
+                                <label class="tel optional" for="telephone">Τηλέφωνο</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fas fa-fw fa-phone"></i>
+                                    </div>
+                                    <div class="form-group tel optional patient_phone_number">
+                                        <input class="string tel optional form-control" type="tel" name="telephone" id="telephone">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group col-xs-12 col-md-6">
+                                <label class="tel optional" for="phone">Κινητό</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fas fa-fw fa-mobile"></i>
+                                    </div>
+                                    <div class="form-group tel optional">
+                                        <input class="string tel optional form-control" type="tel" name="phone" id="phone">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary" id="add-customer-action">Καταχώρηση</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+{% block extra_scripts %}
+    <script>$("select").addClass( "form-control" );</script>
+{% endblock extra_scripts %}

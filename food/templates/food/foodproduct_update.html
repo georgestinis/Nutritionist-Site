@@ -1,0 +1,108 @@
+{% extends "nutrition_dj/base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <div class="wrapper wrapper-content animated">
+        <div class="row">
+            <div class="col-xs-12">
+                <div id="add-food" class="ibox float-e-marging">
+                    <div class="ibox-title">
+                        <div class="col-xs-10">
+                            <h3>
+                                <a style="color:#528405" href="{% url 'food:foodtable' %}">Πίνακας Τροφίμων</a> / <a style="color:#528405" href="{% url 'food:food-detail' object.id %}">Πληροφορίες</a> / Ενημέρωση Τροφίμου
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="widget foods-widget no-padding">
+                    <div class="widget-header display-flex">
+                        <div class="flex-grow">
+                            <h4 class="title">Εισαγωγή προσαρμοσμένης ανάλυσης</h4>
+                        </div>
+                    </div>
+                    <form id="add-food-form" class="clear-fix" method="POST">
+                        <div class="widget-content">
+                            {% csrf_token %}
+                            <div class="container-fluid">
+                                <div class="form-group col-xs-12 col-md-6">
+                                    <label for="name">Ονομασία *</label>
+                                    {{ form.name }}
+                                </div>
+                                <div class="form-group col-xs-12 col-md-6">
+                                    <label for="category">Κατηγορία</label>
+                                    {{ form.category }}
+                                </div>
+                                <div class="form-group col-xs-12 col-md-6">
+                                    <label for="food-size">Μέγεθος</label>
+                                    <div class="form-control" disabled="disabled">100</div>
+                                </div>
+                                <div class="form-group col-xs-12 col-md-6">
+                                    <label for="megethos">Μονάδα μέτρησης μεγέθους</label>
+                                    {{ form.megethos }}
+                                </div>
+                            </div>
+                            <div class="form-group-items container-fluid ibox float-e-margins">
+                                <div class="ibox-title">
+                                    <h3>Μακροθρεπτικά</h3>
+                                </div>
+                                <div class="ibox-content">
+                                    <div class="form-group col-xs-12 col-md-6">
+                                        <label for="energyCal">Ενέργεια</label>
+                                        <div class="input-group">
+                                            {{ form.energyCal }}
+                                            <div class="input-group-addon">kcal</div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-xs-12 col-md-6">
+                                        <label for="protein">Πρωτεΐνη</label>
+                                        <div class="input-group">
+                                            {{ form.protein }}
+                                            <div class="input-group-addon">g</div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-xs-12 col-md-6">
+                                        <label for="carb">Υδατάνθρακες</label>
+                                        <div class="input-group">
+                                            {{ form.carb }}
+                                            <div class="input-group-addon">g</div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-xs-12 col-md-6">
+                                        <label for="total_fat">Ολικό Λίπος</label>
+                                        <div class="input-group">
+                                            {{ form.total_fat}}
+                                            <div class="input-group-addon">g</div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-xs-12 col-md-6">
+                                        <label for="energykJ">Ενέργεια</label>
+                                        <div class="input-group">
+                                            {{ form.energykJ }}
+                                            <div class="input-group-addon">kJ</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary" id="add-food-action">Προσθήκη νέου τροφίμου ως Προσαρμοσμένο</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock content %}
+
+{% block extra_scripts %}
+    <script>
+        $("select").addClass( "form-control" );
+        $("input").addClass( "form-control" );
+    </script>
+{% endblock extra_scripts %}

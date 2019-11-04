@@ -1,0 +1,104 @@
+{% extends "nutrition_dj/base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <div class="wrapper wrapper-content animated">
+        <div class="row">
+            <div class="col-xs-12">
+                <div id="add-food" class="ibox float-e-marging">
+                    <div class="ibox-title">
+                        <div class="col-xs-10">
+                            <h3>
+                                <a style="color:#528405" href="{% url 'food:foodtable' %}">Πίνακας Τροφίμων</a> / Νέο Τρόφιμο
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="widget foods-widget no-padding">
+                    <div class="widget-header display-flex">
+                        <div class="flex-grow">
+                            <h4 class="title">Εισαγωγή προσαρμοσμένης ανάλυσης</h4>
+                        </div>
+                    </div>
+                    <form id="add-food-form" class="clear-fix" method="POST">
+                        <div class="widget-content">
+
+                                {% csrf_token %}
+                                <div class="container-fluid">
+                                    <div class="form-group col-xs-12 col-md-6">
+                                        <label for="name">Ονομασία *</label>
+                                        <input id="name" type="text" class="form-control required" name="name" value="">
+                                    </div>
+                                    <div class="form-group col-xs-12 col-md-6">
+                                        <label for="category">Κατηγορία</label>
+                                        {{ form.category }}
+                                    </div>
+                                    <div class="form-group col-xs-12 col-md-6">
+                                        <label for="food-size">Μέγεθος</label>
+                                        <div class="form-control" disabled="disabled">100</div>
+                                    </div>
+                                    <div class="form-group col-xs-12 col-md-6">
+                                        <label for="megethos">Μονάδα μέτρησης μεγέθους</label>
+                                        {{ form.megethos }}
+                                    </div>
+                                </div>
+                                <div class="form-group-items container-fluid ibox float-e-margins">
+                                    <div class="ibox-title">
+                                        <h3>Μακροθρεπτικά</h3>
+                                    </div>
+                                    <div class="ibox-content">
+                                        <div class="form-group col-xs-12 col-md-6">
+                                            <label for="energyCal">Ενέργεια</label>
+                                            <div class="input-group">
+                                                <input id="energyCal" type="number" class="form-control" name="energyCal" value="0">
+                                                <div class="input-group-addon">kcal</div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-xs-12 col-md-6">
+                                            <label for="protein">Πρωτεΐνη</label>
+                                            <div class="input-group">
+                                                <input id="protein" type="number" class="form-control" name="protein" value="0">
+                                                <div class="input-group-addon">g</div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-xs-12 col-md-6">
+                                            <label for="carb">Υδατάνθρακες</label>
+                                            <div class="input-group">
+                                                <input id="carb" type="number" class="form-control" name="carb" value="0">
+                                                <div class="input-group-addon">g</div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-xs-12 col-md-6">
+                                            <label for="total_fat">Ολικό Λίπος</label>
+                                            <div class="input-group">
+                                                <input id="total_fat" type="number" class="form-control" name="total_fat" value="0">
+                                                <div class="input-group-addon">g</div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-xs-12 col-md-6">
+                                            <label for="energykJ">Ενέργεια</label>
+                                            <div class="input-group">
+                                                <input id="energykJ" type="number" class="form-control" name="energykJ" value="0">
+                                                <div class="input-group-addon">kJ</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary" id="add-food-action">Προσθήκη νέου τροφίμου ως Προσαρμοσμένο</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+
+{% block extra_scripts %}
+    <script>$("select").addClass( "form-control" );</script>
+{% endblock extra_scripts %}

@@ -1,0 +1,45 @@
+﻿{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>{% block head_title %}{% endblock %}</title>
+  {% block extra_head %}
+  {% endblock %}
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+  <link href="{% static 'css/all.css' %}" rel="stylesheet">
+</head>
+<body class="grey lighten-3"> 
+  <div id="wrapper">
+    {% include "nutrition_dj/sidebar.html" %}
+    <div id="page-wrapper" class="gray-bg">
+        {% if messages %}
+          {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} alert-dismissible show" role="alert">
+              {{ message }}
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+          {% endfor %}
+        {% endif %}
+      {% block content %}
+      {% endblock content %}
+
+      {% block extra_body %}
+      {% endblock %}
+    </div>
+  </div>
+  <!-- SCRIPTS -->
+  {% include "nutrition_dj/scripts.html" %}
+  <!-- Charts -->
+  
+  {% block extra_scripts %}
+  {% endblock extra_scripts %}
+</body>
+
+</html>

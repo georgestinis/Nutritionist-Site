@@ -1,0 +1,39 @@
+<!-- Sidebar -->
+<nav class="navbar-default navbar-static-side" role="navigation">
+
+    <ul class="nav metismenu" id="side-menu">
+      <li class="nav-header">
+        <div class="dropdown profile-element">
+          <img src="https://partners.evexis.eu/assets/images/evexis-logo.png?v=0.2.13" alt="">
+        </div>
+        <div class="logo-element">
+            <img src="https://partners.evexis.eu/assets/images/evexis-logo.png?v=0.2.13" alt="Evexis">
+        </div>
+      </li>
+      <li id="home" title="Αρχική">
+        <a href="{% url 'nutrition_dj:home' %}"><i class="fas fa-home"></i> <span class="nav-label">Αρχική</span></a>
+      </li>
+      <li id="customer" title="Πελάτες">
+        <a href="{% url 'customer:customertable' %}"><i class="fas fa-users"></i> <span class="nav-label">Πελάτες</span></a>
+      </li>
+      <li id="appointment" title="Ραντεβού">
+        <a href="#"><i class="fas fa-calendar"></i> <span class="nav-label">Ραντεβού</span></a>
+      </li>
+      <li id="food" title="Τρόφιμα">
+        <a href="{% url 'food:foodtable' %}"><i class="fas fa-lemon-o"></i> <span class="nav-label">Τρόφιμα</span></a>
+      </li>
+    </ul>
+  </nav>
+  <!-- Sidebar -->
+  <script>
+    var pathname = window.location.pathname;
+    if ( pathname == '/' ){
+      document.getElementById("home").classList.add("active");
+    }
+    else if (pathname.includes('/customer/')){
+      document.getElementById("customer").classList.add("active");
+    }
+    else if (pathname.includes('/food/')){
+      document.getElementById("food").classList.add("active");
+    }
+  </script>
